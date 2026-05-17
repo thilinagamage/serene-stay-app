@@ -45,9 +45,3 @@ amplify.yml
 !scripts/
 logs/
 
-# terraform
-*.tfstate
-*.tfstate.*
-.terraform/
-terraform/.terraform.lock.hcl
-terraform/environments/*/.terraform.lock.hcl
