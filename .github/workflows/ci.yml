@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   pull_request:
@@ -8,8 +8,6 @@ on:
 
 env:
   NODE_VERSION: "22"
-  AWS_REGION: "us-east-1"
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   lint-build:
@@ -17,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
@@ -33,40 +31,3 @@ jobs:
           SESSION_SECRET: "ci-test-secret-minimum-32-characters-long"
           AWS_REGION: "us-east-1"
           AWS_S3_BUCKET: "ci-test-bucket"
-
-  deploy:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: [lint-build]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    permissions:
-      id-token: write
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Trigger EC2 deployment via SSM
-        run: |
-          COMMIT_HASH=$(git rev-parse --short HEAD)
-          aws ssm send-command \
-            --document-name "AWS-RunShellScript" \
-            --targets "Key=tag:Name,Values=serenestay-prod" \
-            --parameters 'commands=[
-              "cd /home/app/hotel-booking-app && \
-               git pull origin main && \
-               npm ci --omit=dev && \
-               npx prisma generate && \
-               npx prisma migrate deploy && \
-               npm run build && \
-               pm2 reload ecosystem.config.js"
-            ]' \
-            --comment "Deploy hotel-booking-app ${COMMIT_HASH}" \
-            --region ${{ env.AWS_REGION }}
