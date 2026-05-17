@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import BookingForm from "./BookingForm";
@@ -26,11 +27,13 @@ export default async function RoomDetail({
     <div className="min-h-screen bg-stone-50 px-6 py-16 sm:px-10 lg:px-12">
       <div className="mx-auto max-w-5xl">
         {room.imageUrl && (
-          <div className="mb-8 h-64 w-full overflow-hidden rounded-2xl bg-stone-100 sm:h-80">
-            <img
+          <div className="relative mb-8 h-64 w-full overflow-hidden rounded-2xl bg-stone-100 sm:h-80">
+            <Image
               src={room.imageUrl}
               alt={room.name}
-              className="h-full w-full object-cover"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
+              className="object-cover"
             />
           </div>
         )}

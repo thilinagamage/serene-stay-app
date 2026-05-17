@@ -1,6 +1,8 @@
 #!/usr/bin/env node
+import { execSync } from "child_process";
+
 try {
-  require("child_process").execSync("npx prisma generate", {
+  execSync("npx prisma generate", {
     stdio: "inherit",
     env: { ...process.env },
   });

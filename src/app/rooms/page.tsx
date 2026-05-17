@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 
@@ -62,11 +63,13 @@ export default async function RoomsPage({
               className="group rounded-2xl border border-stone-200 bg-white p-6 shadow-sm transition hover:shadow-md"
             >
               {room.imageUrl && (
-                <div className="mb-4 h-48 w-full overflow-hidden rounded-xl bg-stone-100">
-                  <img
+                <div className="relative mb-4 h-48 w-full overflow-hidden rounded-xl bg-stone-100">
+                  <Image
                     src={room.imageUrl}
                     alt={room.name}
-                    className="h-full w-full object-cover transition group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition group-hover:scale-105"
                   />
                 </div>
               )}
