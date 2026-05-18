@@ -39,7 +39,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
-      - name: Deploy to EC2 via SSH
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -49,6 +49,7 @@ jobs:
             cd /home/ubuntu/serene-stay-app
             git pull origin main
             npm ci --omit=dev
+            npx prisma generate
             npx prisma migrate deploy
             npm run build
             pm2 reload ecosystem.config.js --update-env

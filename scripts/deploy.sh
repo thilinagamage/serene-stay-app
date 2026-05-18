@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ENVIRONMENT="${ENVIRONMENT:-production}"
-APP_DIR="${APP_DIR:-/home/ubuntu/hotel-booking-app}"
+APP_DIR="${APP_DIR:-/home/ubuntu/serene-stay-app}"
 SSM_PATH="${SSM_PATH:-/hotel-booking/$ENVIRONMENT}"
 
 echo "Deploying Next.js app [$ENVIRONMENT]..."
