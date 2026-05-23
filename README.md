@@ -1,5 +1,11 @@
 # Serene Stay — Hotel Booking App
 
+![CI/CD](https://github.com/your-username/hotel-booking-app/actions/workflows/ci.yml/badge.svg)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
+![AWS](https://img.shields.io/badge/AWS-Deployed-orange?logo=amazon-aws)
+![Node.js](https://img.shields.io/badge/Node.js-22-green?logo=node.js)
+
 A full-stack hotel booking web application for a Sri Lankan boutique hotel chain with locations in Galle, Colombo, and Matara.
 
 🌐 **Live:** https://imperialchrysalis.online
