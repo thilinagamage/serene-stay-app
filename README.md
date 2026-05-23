@@ -1,45 +1,115 @@
-This is a [Next.js](https://nextjs.org) App Router project with a `src/`-based structure for AWS and Prisma integration.
+# Serene Stay — Hotel Booking App
 
-## Getting Started
+A full-stack hotel booking web application for a Sri Lankan boutique hotel chain with locations in Galle, Colombo, and Matara.
 
-First, run the development server:
+🌐 **Live:** https://imperialchrysalis.online
+
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js 16 + React 19 + TypeScript
+- **Styling:** Tailwind CSS v4
+- **Database:** PostgreSQL 16 (Amazon RDS)
+- **ORM:** Prisma v7
+- **Auth:** Custom JWT (jose) + bcryptjs
+- **Storage:** Amazon S3
+- **Deployment:** AWS EC2 + ALB + Route 53
+
+---
+
+## Getting Started (Local Development)
+
+### Prerequisites
+- Node.js 22+
+- PostgreSQL running locally
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-org/hotel-booking-app.git
+cd hotel-booking-app
+npm install
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Fill in `.env`:
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/serenestay?sslmode=disable"
+SESSION_SECRET="your-secret-min-32-chars"
+AWS_REGION="us-east-1"
+AWS_S3_BUCKET="your-bucket-name"
+NODE_ENV="development"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font).
+Then run:
 
-## AWS Setup
+```bash
+npx prisma migrate deploy
+npx prisma db seed
+npm run dev
+```
 
-The scaffold includes:
+App runs at http://localhost:3000
 
-- `src/lib/s3.ts` for S3 client configuration
-- `src/app/api/upload/route.ts` for server-side file uploads
-- `prisma/schema.prisma` for PostgreSQL access through Prisma
-- `amplify.yml` and `scripts/deploy.sh` for deployment workflows
+---
 
-## Learn More
+## Demo Credentials
 
-To learn more about Next.js, take a look at the following resources:
+| Role  | Email                    | Password    |
+|-------|--------------------------|-------------|
+| Admin | admin@serenestay.com     | password123 |
+| Guest | guest@example.com        | password123 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── app/          # Next.js pages and API routes
+├── components/   # Shared UI components
+├── lib/          # DB, auth, S3, validation utilities
+├── actions/      # Server actions (login, signup, logout)
+└── types/        # TypeScript types
+prisma/
+├── schema.prisma # Data models (User, Room, Booking, Review)
+└── seed.ts       # Demo data seeder
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## AWS Infrastructure
+
+| Service | Purpose |
+|---------|---------|
+| EC2 (t4g.micro) | Hosts the Next.js app via PM2 |
+| RDS PostgreSQL 16 | Managed database in private subnet |
+| S3 | Room image storage |
+| ALB | HTTPS termination + health checks |
+| ACM | Free SSL certificate |
+| Route 53 | DNS management |
+| CloudWatch | Monitoring and alarms |
+| IAM | EC2 instance profile for S3 access |
+
+---
+
+## CI/CD
+
+GitHub Actions runs on every push to `main`:
+
+1. **Lint & Build** — validates code and builds Next.js
+2. **Deploy** — SSH into EC2, pull latest, migrate, rebuild, reload PM2
+
+---
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | PostgreSQL connection string |
+| `SESSION_SECRET` | JWT signing secret (min 32 chars) |
+| `AWS_REGION` | AWS region (e.g. us-east-1) |
+| `AWS_S3_BUCKET` | S3 bucket name for images |
+| `NODE_ENV` | `development` or `production` |
