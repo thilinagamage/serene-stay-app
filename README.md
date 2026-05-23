@@ -10,7 +10,7 @@ A full-stack hotel booking web application for a Sri Lankan boutique hotel chain
 
 - **Frontend:** Next.js 16 + React 19 + TypeScript
 - **Styling:** Tailwind CSS v4
-- **Database:** PostgreSQL 16 (Amazon RDS)
+- **Database:** PostgreSQL 18 (Amazon RDS)
 - **ORM:** Prisma v7
 - **Auth:** Custom JWT (jose) + bcryptjs
 - **Storage:** Amazon S3
@@ -85,7 +85,7 @@ prisma/
 | Service | Purpose |
 |---------|---------|
 | EC2 (t4g.micro) | Hosts the Next.js app via PM2 |
-| RDS PostgreSQL 16 | Managed database in private subnet |
+| RDS PostgreSQL 18 | Managed database in private subnet |
 | S3 | Room image storage |
 | ALB | HTTPS termination + health checks |
 | ACM | Free SSL certificate |
