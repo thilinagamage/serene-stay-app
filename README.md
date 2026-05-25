@@ -2,13 +2,11 @@
 
 > Full-stack hotel booking application with production AWS deployment — built as a cloud infrastructure assignment demonstrating real-world DevOps practices.
 
-[![CI/CD](https://github.com/<your-username>/hotel-booking-app/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-username>/hotel-booking-app/actions)
-[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)](https://nextjs.org)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-336791?logo=postgresql&logoColor=white)](https://postgresql.org)
-[![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900?logo=amazon-aws&logoColor=white)](https://imperialchrysalis.online)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-
-**Live:** [https://imperialchrysalis.online](https://imperialchrysalis.online)
+![CI/CD](https://github.com/thilinagamage/doctor-channelling-system/actions/workflows/ci.yml/badge.svg)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-blue?logo=postgresql)
+![AWS](https://img.shields.io/badge/AWS-Deployed-orange?logo=amazon-aws)
+![Node.js](https://img.shields.io/badge/Node.js-22-green?logo=node.js)
 
 ---
 
