@@ -1,4 +1,4 @@
-# 🏨 Serene Stay — Hotel Booking Platform
+# 🏨 Serene Stay — Hotel Booking App
 
 > Full-stack hotel booking application with production AWS deployment — built as a cloud infrastructure assignment demonstrating real-world DevOps practices.
 
@@ -342,6 +342,5 @@ Real issues hit during deployment and what they taught me:
 
 **Serene Stay** · Built with Next.js · Deployed on AWS · Automated with GitHub Actions
 
-[Live Demo](https://imperialchrysalis.online) · [Report an Issue](https://github.com/<your-username>/hotel-booking-app/issues)
 
 </div>
